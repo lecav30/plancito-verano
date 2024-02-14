@@ -1,12 +1,15 @@
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
 import Card from "../Card";
-import Beach from "../../images/playahd2.jpg";
+// import Beach from "../../images/playahd2.jpg";
+import CerroAzul from "../../images/playa-cerro-azul.jpeg";
+import PlayaHuacho from "../../images/playa-huacho.jpeg";
+import AquaPark from "../../images/aquapark-hacho.png";
 
 const CardCarousel = () => {
   const Plans = [
     {
-      img: Beach,
+      img: AquaPark,
       name: "Bar Acuático",
       prices: (
         <div>
@@ -18,11 +21,10 @@ const CardCarousel = () => {
           <b>Total:</b> S/.100 - S/.120
         </div>
       ),
-      reference: "",
-      resume: "",
+      resume: <div></div>,
     },
     {
-      img: Beach,
+      img: PlayaHuacho,
       name: "Playas Huacho",
       prices: (
         <div>
@@ -36,11 +38,10 @@ const CardCarousel = () => {
           <b>Total:</b> S/.100 - S/.120
         </div>
       ),
-      reference: "",
-      resume: "",
+      resume: <div></div>,
     },
     {
-      img: Beach,
+      img: CerroAzul,
       name: "Cerro Azul",
       prices: (
         <div>
@@ -53,21 +54,19 @@ const CardCarousel = () => {
           <b>Total:</b> S/.120 - S/.130
         </div>
       ),
-      reference: "",
-      resume: "",
+      resume: <div></div>,
     },
   ];
 
   return (
     <div className="flex justify-center items-center h-full w-full">
-      <Carousel showIndicators={false} showStatus={false} className="max-w-6xl">
+      <Carousel showIndicators={false} showStatus={false} className="max-w-3xl">
         {Plans.map((plan, index) => (
           <Card
             key={index}
             img={plan.img}
             name={plan.name}
             prices={plan.prices}
-            reference={plan.reference}
             resume={plan.resume}
           />
         ))}

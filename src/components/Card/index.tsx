@@ -22,8 +22,7 @@ interface CardProps {
   img: string;
   name: string;
   prices: ReactElement;
-  reference: string;
-  resume: string;
+  resume: ReactElement;
 }
 
 const Card: FC<CardProps> = (props) => {
@@ -36,15 +35,8 @@ const Card: FC<CardProps> = (props) => {
       case "prices":
         setPopupContent(props.prices);
         break;
-      case "reference":
-        setPopupContent(
-          <div className="text-white text-2xl">{props.reference}</div>
-        );
-        break;
       case "plan":
-        setPopupContent(
-          <div className="text-white text-2xl">{props.resume}</div>
-        );
+        setPopupContent(props.resume);
         break;
       default:
         setPopupContent(null);
@@ -58,15 +50,11 @@ const Card: FC<CardProps> = (props) => {
         {popupContent}
       </PopUp>
       <div className="relative flex justify-center">
-        <img src={props.img} alt="" className="rounded-3xl" />
+        <img src={props.img} alt="Portada" className="rounded-3xl h-96" />
         <div className="flex justify-evenly min-w-[50%] absolute bottom-[20%]">
           <InformationButton
             name="Precios"
             onClick={() => handlePopup("prices")}
-          />
-          <InformationButton
-            name="Referencia"
-            onClick={() => handlePopup("reference")}
           />
           <InformationButton
             name="Plancito"
