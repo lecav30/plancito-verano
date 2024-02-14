@@ -63,11 +63,15 @@ const Countdown = () => {
   return (
     <div
       className="flex flex-col md:flex-row justify-center items-center bg-cover bg-no-repeat
-      w-full h-full"
+      w-full h-full relative"
       style={{
         backgroundImage: `url(${Beach})`,
       }}
     >
+      <h1 className="absolute text-6xl font-bold top-[10%]">
+        PLANCITO DE VERANO
+      </h1>
+
       <div className="flex flex-wrap justify-center items-center backdrop-blur-md rounded-lg">
         <div className="relative">
           <svg className="-rotate-90 h-48 w-48">
