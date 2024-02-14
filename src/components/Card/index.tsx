@@ -51,7 +51,10 @@ const Card: FC<CardProps> = (props) => {
       </PopUp>
       <div className="relative flex justify-center">
         <img src={props.img} alt="Portada" className="rounded-3xl h-96" />
-        <div className="flex justify-evenly min-w-[50%] absolute bottom-[20%]">
+        <div
+          className={`flex justify-evenly min-w-[50%] absolute bottom-[20%]
+          ${showPopup ? "hidden" : "visible"}`}
+        >
           <InformationButton
             name="Precios"
             onClick={() => handlePopup("prices")}

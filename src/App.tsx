@@ -1,15 +1,33 @@
 import "./App.css";
 import Countdown from "./components/Countdown";
 import CardCarousel from "./components/CardCarousel";
-import { InstagramEmbed, TikTokEmbed } from "react-social-media-embed";
+import { useSelector } from "react-redux";
+import { Plans } from "./util/Plans";
+
+const OptionSelected = ({ index }: { index: number }) => {
+  return (
+    <div>
+      <h2 className="text-center text-4xl mb-5">{Plans[index].name}</h2>
+      {Plans[index].media}
+    </div>
+  );
+};
 
 function App() {
+  const index = useSelector((state: any) => state.plans.index);
+
   return (
     <div className="h-screen overflow-auto snap-mandatory snap-y scrollbar-hide">
       <div className="h-screen snap-start">
         <Countdown />
       </div>
-      <div className="h-screen snap-start">
+      <div className="h-screen snap-start flex justify-evenly items-center">
+        <CardCarousel />
+        <div className="hidden lg:block">
+          <OptionSelected index={index} />
+        </div>
+      </div>
+      {/* <div className="h-screen snap-start">
         <CardCarousel />
       </div>
       <div className="h-screen snap-start justify-evenly items-center hidden lg:flex">
@@ -25,7 +43,7 @@ function App() {
           <h2 className="text-center text-4xl mb-5">Cerro Azul</h2>
           <TikTokEmbed url="https://www.tiktok.com/@ytuqueplanes/video/7317727984037678341" />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
