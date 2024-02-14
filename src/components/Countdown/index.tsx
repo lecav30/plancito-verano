@@ -1,4 +1,5 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from "react";
+import Playa from "../../images/playahd2.jpg";
 
 const Countdown = () => {
   const [dias, setDias] = useState(0);
@@ -6,18 +7,22 @@ const Countdown = () => {
   const [minutos, setMin] = useState(0);
   const [segundos, setSeg] = useState(0);
 
-  const daysCircle = useRef();
-  const hourCircle = useRef();
-  const minuteCircle = useRef();
-  const secondCircle = useRef();
+  const daysCircle = useRef<SVGCircleElement | null>(null);
+  const hourCircle = useRef<SVGCircleElement | null>(null);
+  const minuteCircle = useRef<SVGCircleElement | null>(null);
+  const secondCircle = useRef<SVGCircleElement | null>(null);
 
   const actualizarContador = () => {
-    const fechaLimite = new Date('2024-03-09T00:00:00');
+    const fechaLimite = new Date("2024-03-09T00:00:00");
     const fechaActual = new Date();
     const diferenciaTiempo = fechaLimite.getTime() - fechaActual.getTime();
     const diferenciaDias = Math.ceil(diferenciaTiempo / (1000 * 60 * 60 * 24));
-    const diferenciaHoras = Math.ceil((diferenciaTiempo % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const difereciaMin = Math.ceil((diferenciaTiempo % (1000 * 60 * 60)) / (1000 * 60));
+    const diferenciaHoras = Math.ceil(
+      (diferenciaTiempo % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+    );
+    const difereciaMin = Math.ceil(
+      (diferenciaTiempo % (1000 * 60 * 60)) / (1000 * 60)
+    );
     const diferenciaSeg = Math.ceil((diferenciaTiempo % (1000 * 60)) / 1000);
 
     setDias(diferenciaDias);
@@ -26,16 +31,24 @@ const Countdown = () => {
     setSeg(diferenciaSeg);
 
     if (daysCircle.current) {
-      daysCircle.current.style.strokeDashoffset = `${440 - (440 * diferenciaDias) / 365}px`;
+      daysCircle.current.style.strokeDashoffset = `${
+        440 - (440 * diferenciaDias) / 365
+      }px`;
     }
     if (hourCircle.current) {
-      hourCircle.current.style.strokeDashoffset = `${451 - (451 * diferenciaHoras) / 24}px`;
+      hourCircle.current.style.strokeDashoffset = `${
+        451 - (451 * diferenciaHoras) / 24
+      }px`;
     }
     if (minuteCircle.current) {
-      minuteCircle.current.style.strokeDashoffset = `${451 - (451 * difereciaMin) / 60}px`;
+      minuteCircle.current.style.strokeDashoffset = `${
+        451 - (451 * difereciaMin) / 60
+      }px`;
     }
     if (secondCircle.current) {
-      secondCircle.current.style.strokeDashoffset = `${451 - (451 * diferenciaSeg) / 60}px`;
+      secondCircle.current.style.strokeDashoffset = `${
+        451 - (451 * diferenciaSeg) / 60
+      }px`;
     }
   };
 
@@ -48,7 +61,14 @@ const Countdown = () => {
   });
 
   return (
-    <div className="flex flex-col md:flex-row justify-center items-center rounded-lg backdrop-blur-md bg-opacity-100">
+    <div
+      className="flex flex-col md:flex-row justify-center items-center rounded-lg
+      backdrop-blur-md bg-opacity-100 relative overflow-hidden rounded-box
+      bg-cover bg-no-repeat text-center w-full h-full"
+      style={{
+        backgroundImage: `url(${Playa})`,
+      }}
+    >
       <div className="flex flex-wrap justify-center items-center">
         <div className="relative">
           <svg className="-rotate-90 h-48 w-48">
@@ -64,13 +84,16 @@ const Countdown = () => {
               cx="90"
               cy="90"
               style={{
-                strokeDasharray: '440px',
-                strokeDashoffset: '440px',
+                strokeDasharray: "440px",
+                strokeDashoffset: "440px",
               }}
               className="fill-transparent stroke-white stroke-[8px]"
             ></circle>
           </svg>
-          <div className="text-[#000000] absolute top-16 left-11 text-2xl font-semibold flex flex-col items-center w-24 h-20">
+          <div
+            className="text-[#000000] absolute top-16 left-11 text-2xl font-semibold
+            flex flex-col items-center w-24 h-20"
+          >
             <span className="text-center">{dias}</span>
             <span className="text-center">Dias</span>
           </div>
@@ -89,13 +112,16 @@ const Countdown = () => {
               cx="90"
               cy="90"
               style={{
-                strokeDasharray: '451px',
-                strokeDashoffset: '451px',
+                strokeDasharray: "451px",
+                strokeDashoffset: "451px",
               }}
               className="fill-transparent stroke-white stroke-[8px]"
             ></circle>
           </svg>
-          <div className="text-[#000000] absolute top-16 left-11 text-2xl font-semibold flex flex-col items-center w-24 h-20">
+          <div
+            className="text-[#000000] absolute top-16 left-11 text-2xl font-semibold
+            flex flex-col items-center w-24 h-20"
+          >
             <span className="text-center">{horas}</span>
             <span className="text-center">Horas</span>
           </div>
@@ -114,13 +140,16 @@ const Countdown = () => {
               cx="90"
               cy="90"
               style={{
-                strokeDasharray: '451px',
-                strokeDashoffset: '451px',
+                strokeDasharray: "451px",
+                strokeDashoffset: "451px",
               }}
               className="fill-transparent stroke-white stroke-[8px]"
             ></circle>
           </svg>
-          <div className="text-[#000000] absolute top-16 left-11 text-2xl font-semibold flex flex-col items-center w-24 h-20">
+          <div
+            className="text-[#000000] absolute top-16 left-11 text-2xl font-semibold 
+            flex flex-col items-center w-24 h-20"
+          >
             <span className="text-center">{minutos}</span>
             <span className="text-center">Minutos</span>
           </div>
@@ -139,13 +168,16 @@ const Countdown = () => {
               cx="90"
               cy="90"
               style={{
-                strokeDasharray: '451px',
-                strokeDashoffset: '451px',
+                strokeDasharray: "451px",
+                strokeDashoffset: "451px",
               }}
               className="fill-transparent stroke-white stroke-[8px]"
             ></circle>
           </svg>
-          <div className="text-[#000000] absolute top-16 left-11 text-2xl font-semibold flex flex-col items-center w-24 h-20">
+          <div
+            className="text-[#000000] absolute top-16 left-11 text-2xl font-semibold 
+            flex flex-col items-center w-24 h-20"
+          >
             <span className="text-center">{segundos}</span>
             <span className="text-center">Segundos</span>
           </div>
