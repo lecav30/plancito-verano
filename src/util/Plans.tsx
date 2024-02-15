@@ -62,7 +62,12 @@ export const Plans = [
     ),
     resume: <div></div>,
     media: (
-      <YouTubeEmbed url="https://youtu.be/RHbENWNVXCw?si=dhVP6gyaMPvp1kQU" />
+      <YouTubeEmbed
+        url="https://youtu.be/RHbENWNVXCw?si=dhVP6gyaMPvp1kQU"
+        width={400}
+        height={300}
+        className="mb-20"
+      />
     ),
   },
 ];
