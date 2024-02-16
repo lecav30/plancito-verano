@@ -3,6 +3,7 @@ import Countdown from "./components/Countdown";
 import CardCarousel from "./components/CardCarousel";
 import { useSelector } from "react-redux";
 import { Plans } from "./util/Plans";
+import { RootState } from "./redux/store";
 
 const OptionSelected = ({ index }: { index: number }) => {
   return (
@@ -14,7 +15,7 @@ const OptionSelected = ({ index }: { index: number }) => {
 };
 
 function App() {
-  const index = useSelector((state: any) => state.plans.index);
+  const index = useSelector((state: RootState) => state.plans.index);
 
   return (
     <div className="h-screen overflow-auto snap-mandatory snap-y scrollbar-hide">

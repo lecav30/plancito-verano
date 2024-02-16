@@ -1,5 +1,7 @@
 import { FC, ReactElement, useState } from "react";
-import PopUp from "../Popup";
+import { handleShowInformation } from "../../features/plans/plansSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
 
 interface InformationButtonProps {
   name: string;
@@ -18,6 +20,41 @@ const InformationButton: FC<InformationButtonProps> = (props) => {
   );
 };
 
+interface InformationProps {
+  children: ReactElement | null;
+  visible: boolean;
+}
+
+const InformationBox: FC<InformationProps> = (props) => {
+  const dispatch = useDispatch();
+
+  return (
+    <div
+      className={`absolute z-40 flex justify-center items-center bg-[#00000080]
+      px-4 py-2 rounded-3xl text-white text-2xl inset-0
+      ${props.visible ? "block" : "hidden"}`}
+    >
+      <button
+        className="absolute top-10 right-10"
+        onClick={() => dispatch(handleShowInformation())}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+        >
+          <g fill="none" stroke="#fff" stroke-width="2">
+            <circle cx="12" cy="12" r="10" />
+            <path stroke-linecap="round" d="m14.5 9.5l-5 5m0-5l5 5" />
+          </g>
+        </svg>
+      </button>
+      {props.children}
+    </div>
+  );
+};
+
 interface CardProps {
   img: string;
   name: string;
@@ -26,42 +63,46 @@ interface CardProps {
 }
 
 const Card: FC<CardProps> = (props) => {
-  const [showPopup, setShowPopup] = useState(false);
-  const [popupContent, setPopupContent] = useState<ReactElement | null>(null);
+  const showInformationBox = useSelector(
+    (state: RootState) => state.plans.showInformation
+  );
+  const dispatch = useDispatch();
+  const [informationContent, setInformationContent] =
+    useState<ReactElement | null>(null);
 
-  const handlePopup = (content: string) => {
-    setShowPopup(!showPopup);
+  const handleInformationBox = (content: string) => {
+    dispatch(handleShowInformation());
     switch (content) {
       case "prices":
-        setPopupContent(props.prices);
+        setInformationContent(props.prices);
         break;
       case "plan":
-        setPopupContent(props.resume);
+        setInformationContent(props.resume);
         break;
       default:
-        setPopupContent(null);
+        setInformationContent(null);
         break;
     }
   };
 
   return (
     <div className="relative">
-      <PopUp visible={showPopup} onClick={() => setShowPopup(false)}>
-        {popupContent}
-      </PopUp>
+      <InformationBox visible={showInformationBox}>
+        {informationContent}
+      </InformationBox>
       <div className="relative flex justify-center">
         <img src={props.img} alt="Portada" className="rounded-3xl h-96" />
         <div
           className={`flex justify-evenly min-w-[50%] absolute bottom-[20%]
-          ${showPopup ? "hidden" : "visible"}`}
+          ${showInformationBox ? "hidden" : "visible"}`}
         >
           <InformationButton
             name="Precios"
-            onClick={() => handlePopup("prices")}
+            onClick={() => handleInformationBox("prices")}
           />
           <InformationButton
             name="Plancito"
-            onClick={() => handlePopup("plan")}
+            onClick={() => handleInformationBox("plan")}
           />
         </div>
       </div>
