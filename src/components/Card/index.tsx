@@ -14,7 +14,9 @@ const InformationButton: FC<InformationButtonProps> = (props) => {
   return (
     <button
       className={`border-2 px-2 py-1 rounded-lg text-xl
-      ${style.darkMode ? "text-white border-white" : "text-black border-black"}`}
+      ${
+        style.darkMode ? "text-white border-white" : "text-black border-black"
+      }`}
       style={{
         backgroundColor: `${style.primaryColor}80`,
       }}
@@ -49,9 +51,9 @@ const InformationBox: FC<InformationProps> = (props) => {
           height="24"
           viewBox="0 0 24 24"
         >
-          <g fill="none" stroke="#fff" stroke-width="2">
+          <g fill="none" stroke="#fff" strokeWidth="2">
             <circle cx="12" cy="12" r="10" />
-            <path stroke-linecap="round" d="m14.5 9.5l-5 5m0-5l5 5" />
+            <path strokeLinecap="round" d="m14.5 9.5l-5 5m0-5l5 5" />
           </g>
         </svg>
       </button>
@@ -69,7 +71,7 @@ interface CardProps {
 
 const Card: FC<CardProps> = (props) => {
   const showInformationBox = useSelector(
-    (state: RootState) => state.plans.showInformation,
+    (state: RootState) => state.plans.showInformation
   );
   const style = useSelector((state: RootState) => state.plans.style);
 

@@ -12,8 +12,11 @@ import { Dialog, Transition } from "@headlessui/react";
 import { useState, Fragment } from "react";
 import { RootState } from "../../redux/store";
 import { myStyles } from "../../util/Styles";
+import axios from "axios";
 
 const CardCarousel = () => {
+  const API = import.meta.env.VITE_API_URL;
+
   const dispatch = useDispatch();
   const availableStyles = ["Aquapark", "PlayaHuacho", "CerroAzul"];
 
@@ -22,12 +25,27 @@ const CardCarousel = () => {
     (state: RootState) => state.plans.showInformation
   );
   const [showDialog, setShowDialog] = useState(false);
+  const [voterData, setVoterData] = useState({
+    Name: "",
+    Comment: "",
+  });
 
   const openDialog = () => {
     setShowDialog(true);
   };
   const closeDialog = () => {
     setShowDialog(false);
+  };
+
+  const handleSubmit = async (event: { preventDefault: () => void }) => {
+    event.preventDefault();
+    axios.post(API, voterData).then((res) => {
+      console.log(res);
+      setVoterData({
+        Name: "",
+        Comment: "",
+      });
+    });
   };
 
   return (
@@ -101,7 +119,7 @@ const CardCarousel = () => {
                   }}
                 >
                   <Dialog.Title>Por favor completa la encuesta!</Dialog.Title>
-                  <form action="" className="mt-5">
+                  <form onSubmit={handleSubmit} className="mt-5">
                     <div className="flex flex-col mb-3">
                       <label htmlFor="name" className="py-2">
                         Nombre completo
@@ -111,6 +129,10 @@ const CardCarousel = () => {
                         id="name"
                         placeholder="Escribe tu nombre..."
                         className="text-black focus:outline-none py-1 px-2 rounded-lg"
+                        value={voterData.Name}
+                        onChange={(e) =>
+                          setVoterData({ ...voterData, Name: e.target.value })
+                        }
                       />
                     </div>
                     <div className="flex flex-col">
@@ -121,31 +143,37 @@ const CardCarousel = () => {
                         id="comments"
                         placeholder="Deja tu comentario..."
                         className="text-black focus:outline-none py-1 px-2 rounded-lg"
+                        value={voterData.Comment}
+                        onChange={(e) =>
+                          setVoterData({
+                            ...voterData,
+                            Comment: e.target.value,
+                          })
+                        }
+                      />
+                    </div>
+                    <div className="flex justify-evenly mt-5">
+                      <button
+                        className={`px-2 py-1 border-black border-2 rounded-lg
+                      ${style.darkMode ? "text-white" : "text-black"}`}
+                        style={{
+                          backgroundColor: style.primaryColor,
+                        }}
+                        onClick={closeDialog}
+                      >
+                        Cancelar
+                      </button>
+                      <input
+                        type="submit"
+                        className={`px-2 py-1 border-black border-2 rounded-lg
+                      ${style.darkMode ? "text-white" : "text-black"}`}
+                        style={{
+                          backgroundColor: style.primaryColor,
+                        }}
+                        onClick={closeDialog}
                       />
                     </div>
                   </form>
-                  <div className="flex justify-evenly mt-5">
-                    <button
-                      className={`px-2 py-1 border-black border-2 rounded-lg
-                      ${style.darkMode ? "text-white" : "text-black"}`}
-                      style={{
-                        backgroundColor: style.primaryColor,
-                      }}
-                      onClick={closeDialog}
-                    >
-                      Cancelar
-                    </button>
-                    <button
-                      className={`px-2 py-1 border-black border-2 rounded-lg
-                      ${style.darkMode ? "text-white" : "text-black"}`}
-                      style={{
-                        backgroundColor: style.primaryColor,
-                      }}
-                      onClick={closeDialog}
-                    >
-                      Enviar
-                    </button>
-                  </div>
                 </Dialog.Panel>
               </Transition.Child>
             </div>
