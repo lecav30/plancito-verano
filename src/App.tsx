@@ -6,9 +6,21 @@ import { Plans } from "./util/Plans";
 import { RootState } from "./redux/store";
 
 const OptionSelected = ({ index }: { index: number }) => {
+  const style = useSelector((state: RootState) => state.plans.style);
+
   return (
     <div>
-      <h2 className="text-center text-4xl mb-5">{Plans[index].name}</h2>
+      <h2
+        className={`text-center text-4xl mb-5
+        ${style.darkMode ? "text-white" : "text-black"}`}
+        style={{
+          textShadow: style.darkMode
+            ? `2px 2px 4px ${style.darkColor}`
+            : `2px 2px 4px ${style.lightColor}`,
+        }}
+      >
+        {Plans[index].name}
+      </h2>
       {Plans[index].media}
     </div>
   );
@@ -16,13 +28,20 @@ const OptionSelected = ({ index }: { index: number }) => {
 
 function App() {
   const index = useSelector((state: RootState) => state.plans.index);
+  const style = useSelector((state: RootState) => state.plans.style);
 
   return (
     <div className="h-screen overflow-auto snap-mandatory snap-y scrollbar-hide">
       <div className="h-screen snap-start">
         <Countdown />
       </div>
-      <div className="h-screen snap-start flex justify-evenly items-center">
+      <div
+        className="h-screen snap-start flex justify-evenly items-center transition-all"
+        style={{
+          // backgroundColor: style.backgroundColor,
+          background: `linear-gradient(to top, ${style.primaryColor} 50%, ${style.secondaryColor} 75%, ${style.backgroundColor} 100%)`,
+        }}
+      >
         <CardCarousel />
         <div className="hidden lg:block">
           <OptionSelected index={index} />

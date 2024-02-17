@@ -9,10 +9,15 @@ interface InformationButtonProps {
 }
 
 const InformationButton: FC<InformationButtonProps> = (props) => {
+  const style = useSelector((state: RootState) => state.plans.style);
+
   return (
     <button
-      className="border-white border-2 px-2 py-1 rounded-lg bg-[#ffffff70]
-      text-xl"
+      className={`border-2 px-2 py-1 rounded-lg text-xl
+      ${style.darkMode ? "text-white border-white" : "text-black border-black"}`}
+      style={{
+        backgroundColor: `${style.primaryColor}80`,
+      }}
       onClick={props.onClick}
     >
       {props.name}
@@ -64,9 +69,12 @@ interface CardProps {
 
 const Card: FC<CardProps> = (props) => {
   const showInformationBox = useSelector(
-    (state: RootState) => state.plans.showInformation
+    (state: RootState) => state.plans.showInformation,
   );
+  const style = useSelector((state: RootState) => state.plans.style);
+
   const dispatch = useDispatch();
+
   const [informationContent, setInformationContent] =
     useState<ReactElement | null>(null);
 
@@ -86,7 +94,12 @@ const Card: FC<CardProps> = (props) => {
   };
 
   return (
-    <div className="relative">
+    <div
+      className="relative border-2 rounded-3xl"
+      style={{
+        borderColor: style.darkColor,
+      }}
+    >
       <InformationBox visible={showInformationBox}>
         {informationContent}
       </InformationBox>
