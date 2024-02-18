@@ -105,16 +105,16 @@ const CardCarousel = () => {
 
         <button
           className={`mt-5 border-black border-2 rounded-lg px-2 py-1
-          disabled:opacity-50 w-fit ${
-            style.darkMode ? "text-white" : "text-black"
+          w-fit ${style.darkMode ? "text-white" : "text-black"} ${
+            cookies.vote && "opacity-50"
           }`}
           style={{
             backgroundColor: style.primaryColor,
           }}
-          disabled={cookies.vote}
           onClick={openDialog}
         >
-          Quiero ir ahí!
+          {" "}
+          {cookies.vote ? "Ya votaste!" : "Quiero ir ahí!"}
         </button>
       </div>
       <Transition appear show={showDialog} as={Fragment}>
@@ -148,65 +148,78 @@ const CardCarousel = () => {
                     backgroundColor: style.backgroundColor,
                   }}
                 >
-                  <Dialog.Title>Por favor completa la encuesta!</Dialog.Title>
-                  <form onSubmit={handleSubmit} className="mt-5">
-                    <div className="flex flex-col mb-3">
-                      <label htmlFor="name" className="py-2">
-                        Nombre completo
-                      </label>
-                      <input
-                        type="text"
-                        id="name"
-                        placeholder="Escribe tu nombre..."
-                        className="text-black focus:outline-none py-1 px-2 rounded-lg"
-                        value={voterData.Name}
-                        onChange={(e) =>
-                          setVoterData({ ...voterData, Name: e.target.value })
-                        }
-                      />
-                    </div>
-                    <div className="flex flex-col">
-                      <label htmlFor="comments" className="py-2">
-                        Algún comentario?
-                      </label>
-                      <textarea
-                        id="comments"
-                        placeholder="Deja tu comentario..."
-                        className="text-black focus:outline-none py-1 px-2 rounded-lg"
-                        value={voterData.Comment}
-                        onChange={(e) =>
-                          setVoterData({
-                            ...voterData,
-                            Comment: e.target.value,
-                          })
-                        }
-                      />
-                    </div>
-                    <div className="flex justify-evenly mt-5">
-                      <button
-                        type="button"
-                        className={`px-2 py-1 border-black border-2 rounded-lg
+                  <Dialog.Title className="text-center">
+                    {cookies.vote
+                      ? "Ya completaste la encuesta!"
+                      : "Por favor completa la encuesta!"}
+                  </Dialog.Title>
+                  {cookies.vote ? (
+                    <p className="text-center text-sm mt-5">
+                      Gracias por tu voto! <br />
+                      En caso te hayas equivocado o quieras cambiar de voto por
+                      favor escribelo en el grupo de WhatsApp o por privado a
+                      los organizadores del grupo. Muchas gracias!
+                    </p>
+                  ) : (
+                    <form onSubmit={handleSubmit} className="mt-5">
+                      <div className="flex flex-col mb-3">
+                        <label htmlFor="name" className="py-2">
+                          Nombre completo
+                        </label>
+                        <input
+                          type="text"
+                          id="name"
+                          placeholder="Escribe tu nombre..."
+                          className="text-black focus:outline-none py-1 px-2 rounded-lg"
+                          value={voterData.Name}
+                          onChange={(e) =>
+                            setVoterData({ ...voterData, Name: e.target.value })
+                          }
+                        />
+                      </div>
+                      <div className="flex flex-col">
+                        <label htmlFor="comments" className="py-2">
+                          Algún comentario?
+                        </label>
+                        <textarea
+                          id="comments"
+                          placeholder="Deja tu comentario..."
+                          className="text-black focus:outline-none py-1 px-2 rounded-lg"
+                          value={voterData.Comment}
+                          onChange={(e) =>
+                            setVoterData({
+                              ...voterData,
+                              Comment: e.target.value,
+                            })
+                          }
+                        />
+                      </div>
+                      <div className="flex justify-evenly mt-5">
+                        <button
+                          type="button"
+                          className={`px-2 py-1 border-black border-2 rounded-lg
                         ${style.darkMode ? "text-white" : "text-black"}`}
-                        style={{
-                          backgroundColor: style.primaryColor,
-                        }}
-                        onClick={closeDialog}
-                      >
-                        Cancelar
-                      </button>
-                      <button
-                        type="submit"
-                        className={`px-2 py-1 border-black border-2 rounded-lg
+                          style={{
+                            backgroundColor: style.primaryColor,
+                          }}
+                          onClick={closeDialog}
+                        >
+                          Cancelar
+                        </button>
+                        <button
+                          type="submit"
+                          className={`px-2 py-1 border-black border-2 rounded-lg
                         ${style.darkMode ? "text-white" : "text-black"}`}
-                        style={{
-                          backgroundColor: style.primaryColor,
-                        }}
-                        onClick={closeDialog}
-                      >
-                        Enviar
-                      </button>
-                    </div>
-                  </form>
+                          style={{
+                            backgroundColor: style.primaryColor,
+                          }}
+                          onClick={closeDialog}
+                        >
+                          Enviar
+                        </button>
+                      </div>
+                    </form>
+                  )}
                 </Dialog.Panel>
               </Transition.Child>
             </div>
