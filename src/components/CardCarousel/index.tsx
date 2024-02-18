@@ -16,7 +16,6 @@ import axios from "axios";
 
 const OptionSelected = ({ index }: { index: number }) => {
   const style = useSelector((state: RootState) => state.plans.style);
-
   return (
     <div>
       <h2
@@ -182,7 +181,7 @@ const CardCarousel = () => {
                         style={{
                           backgroundColor: style.primaryColor,
                         }}
-                        onClick={closeDialog}
+                        onClick={closeDialog} 
                       >
                         Cancelar
                       </button>
@@ -193,7 +192,8 @@ const CardCarousel = () => {
                         style={{
                           backgroundColor: style.primaryColor,
                         }}
-                        onClick={closeDialog}
+                        onClick={closeDialog} 
+                        disabled = {voterData.Comment === "" || voterData.Name === "" }
                       />
                     </div>
                   </form>

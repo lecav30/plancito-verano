@@ -35,7 +35,7 @@ const Countdown = () => {
 
     if (daysCircle.current) {
       daysCircle.current.style.strokeDashoffset = `${
-        440 - (440 * daysDifference) / 365
+        440 - (440 * daysDifference) / 30
       }px`;
     }
     if (hourCircle.current) {
@@ -80,29 +80,29 @@ const Countdown = () => {
         VERANO
       </h1>
       {screenWidth < 768 ? (
-        <div className="relative backdrop-blur-md rounded-lg mt-20">
+        <div className="flex flex-wrap justify-center items-center backdrop-blur-md rounded-lg">
           <svg className="-rotate-90 h-48 w-48">
             <circle
-              r="70"
-              cx="90"
-              cy="90"
+              r="90"
+              cx="100"
+              cy="100"
               className="fill-transparent stroke-[#FEDD00] stroke-[8px]"
             ></circle>
             <circle
-              r="70"
+              r="90"
               ref={daysCircle}
-              cx="90"
-              cy="90"
+              cx="100"
+              cy="100"
               style={{
-                strokeDasharray: "440px",
-                strokeDashoffset: "440px",
+                strokeDasharray: "500px",
+                strokeDashoffset: "500px",
               }}
               className="fill-transparent stroke-white stroke-[8px]"
             ></circle>
           </svg>
           <div
-            className="text-[#000000] absolute top-[70px] left-11 text-xl font-semibold
-            flex flex-col items-center w-24 h-20"
+            className="text-[#000000] absolute top-[48px] left-11 text-xl font-semibold
+            flex flex-col items-center w-24 h-20 mx-2"
           >
             <div className="flex gap-2">
               <span className="text-center">{days}</span>
@@ -111,6 +111,10 @@ const Countdown = () => {
             <div className="flex gap-2">
               <span className="text-center">{hours}</span>
               <span className="text-center">Horas</span>
+            </div>
+            <div className="flex gap-2">
+              <span className="text-center">{minutes}</span>
+              <span className="text-center">Minutos</span>
             </div>
           </div>
         </div>
