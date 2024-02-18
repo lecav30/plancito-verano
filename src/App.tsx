@@ -11,7 +11,7 @@ const OptionSelected = ({ index }: { index: number }) => {
   return (
     <div>
       <h2
-        className={`text-center text-4xl mb-5
+        className={`text-center text-4xl mb-5 max-lg:text-center
         ${style.darkMode ? "text-white" : "text-black"}`}
         style={{
           textShadow: style.darkMode
@@ -68,4 +68,6 @@ function App() {
   );
 }
 
+
 export default App;
+
