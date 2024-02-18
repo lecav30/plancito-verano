@@ -86,7 +86,7 @@ const Countdown = () => {
               r="70"
               cx="90"
               cy="90"
-              className="fill-transparent stroke-[#88adf1] stroke-[8px]"
+              className="fill-transparent stroke-[#FEDD00] stroke-[8px]"
             ></circle>
             <circle
               r="70"
@@ -122,7 +122,7 @@ const Countdown = () => {
                 r="70"
                 cx="90"
                 cy="90"
-                className="fill-transparent stroke-[#88adf1] stroke-[8px]"
+                className="fill-transparent stroke-[#FEDD00] stroke-[8px]"
               ></circle>
               <circle
                 r="70"
@@ -150,7 +150,7 @@ const Countdown = () => {
                 r="70"
                 cx="90"
                 cy="90"
-                className="fill-transparent stroke-[#88adf1] stroke-[8px]"
+                className="fill-transparent stroke-[#FEDD00] stroke-[8px]"
               ></circle>
               <circle
                 r="70"
@@ -178,7 +178,7 @@ const Countdown = () => {
                 r="70"
                 cx="90"
                 cy="90"
-                className="fill-transparent stroke-[#88adf1] stroke-[8px]"
+                className="fill-transparent stroke-[#FEDD00] stroke-[8px]"
               ></circle>
               <circle
                 r="70"
@@ -206,7 +206,7 @@ const Countdown = () => {
                 r="70"
                 cx="90"
                 cy="90"
-                className="fill-transparent stroke-[#88adf1] stroke-[8px]"
+                className="fill-transparent stroke-[#FEDD00] stroke-[8px]"
               ></circle>
               <circle
                 r="70"
