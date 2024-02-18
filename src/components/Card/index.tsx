@@ -3,6 +3,7 @@ import { handleShowInformation } from "../../features/plans/plansSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 
+
 interface InformationButtonProps {
   name: string;
   onClick?: () => void;
@@ -38,7 +39,7 @@ const InformationBox: FC<InformationProps> = (props) => {
   return (
     <div
       className={`absolute z-40 flex justify-center items-center bg-[#00000080]
-      px-4 py-2 rounded-3xl text-white text-2xl inset-0
+      px-4 py-2 rounded-3xl text-white text-2xl inset-0 max-lg:text-base
       ${props.visible ? "block" : "hidden"}`}
     >
       <button
@@ -97,7 +98,7 @@ const Card: FC<CardProps> = (props) => {
 
   return (
     <div
-      className="relative border-2 rounded-3xl"
+      className="relative border-2 rounded-3xl "
       style={{
         borderColor: style.darkColor,
       }}
@@ -105,10 +106,10 @@ const Card: FC<CardProps> = (props) => {
       <InformationBox visible={showInformationBox}>
         {informationContent}
       </InformationBox>
-      <div className="relative flex justify-center">
-        <img src={props.img} alt="Portada" className="rounded-3xl h-96" />
+      <div className="relative flex justify-center ">
+        <img src={props.img} alt="Portada" className="rounded-3xl h-96 max-lg:h-80" />
         <div
-          className={`flex justify-evenly min-w-[50%] absolute bottom-[20%]
+          className={`flex justify-evenly min-w-[50%] absolute bottom-[20%] max-lg:space-x-3
           ${showInformationBox ? "hidden" : "visible"}`}
         >
           <InformationButton

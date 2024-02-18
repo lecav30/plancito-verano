@@ -14,12 +14,32 @@ import { RootState } from "../../redux/store";
 import { myStyles } from "../../util/Styles";
 import axios from "axios";
 
+const OptionSelected = ({ index }: { index: number }) => {
+  const style = useSelector((state: RootState) => state.plans.style);
+
+  return (
+    <div>
+      <h2
+        className={`min:text-center text-4xl mb-5 
+        ${style.darkMode ? "text-white" : "text-black"}`}
+        style={{
+          textShadow: style.darkMode
+            ? `2px 2px 4px ${style.darkColor}`
+            : `2px 2px 4px ${style.lightColor}`,
+        }}
+      >
+        {Plans[index].name}
+      </h2>
+    </div>
+  );
+};
+
 const CardCarousel = () => {
   const API = import.meta.env.VITE_API_URL;
 
   const dispatch = useDispatch();
   const availableStyles = ["Aquapark", "PlayaHuacho", "CerroAzul"];
-
+  const index = useSelector((state: RootState) => state.plans.index);
   const style = useSelector((state: RootState) => state.plans.style);
   const showInformationBox = useSelector(
     (state: RootState) => state.plans.showInformation
@@ -49,8 +69,11 @@ const CardCarousel = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-full w-full lg:w-1/2">
+    <div className="flex justify-center items-center h-full w-full lg:w-1/2 max-lg:mx-7 ">
       <div className="flex flex-col items-center">
+        <div className="hidden max-lg:block ">
+          <OptionSelected index={index} />
+        </div>
         <Carousel
           showIndicators={false}
           showStatus={false}

@@ -72,8 +72,8 @@ const Countdown = () => {
         PLANCITO DE VERANO
       </h1>
 
-      <div className="flex flex-wrap justify-center items-center backdrop-blur-md rounded-lg">
-        <div className="relative">
+      <div className="flex flex-wrap justify-center items-center backdrop-blur-md rounded-lg ">
+        <div className="relative ">
           <svg className="-rotate-90 h-48 w-48">
             <circle
               r="70"
