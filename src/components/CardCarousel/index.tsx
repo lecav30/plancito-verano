@@ -13,6 +13,7 @@ import { useState, Fragment } from "react";
 import { RootState } from "../../redux/store";
 import { myStyles } from "../../util/Styles";
 import axios from "axios";
+import { useCookies } from "react-cookie";
 
 const OptionSelected = ({ index }: { index: number }) => {
   const style = useSelector((state: RootState) => state.plans.style);
@@ -24,8 +25,8 @@ const OptionSelected = ({ index }: { index: number }) => {
         ${style.darkMode ? "text-white" : "text-black"}`}
         style={{
           textShadow: style.darkMode
-            ? `2px 2px 4px ${style.darkColor}`
-            : `2px 2px 4px ${style.lightColor}`,
+            ? `.125rem .125rem .25rem ${style.darkColor}`
+            : `.125rem .125rem .25rem ${style.lightColor}`,
         }}
       >
         {Plans[index].name}
@@ -36,18 +37,22 @@ const OptionSelected = ({ index }: { index: number }) => {
 
 const CardCarousel = () => {
   const API = import.meta.env.VITE_API_URL;
-
+  const [cookies, setCookie] = useCookies(["vote"]);
   const dispatch = useDispatch();
+
   const availableStyles = ["Aquapark", "PlayaHuacho", "CerroAzul"];
+
   const index = useSelector((state: RootState) => state.plans.index);
   const style = useSelector((state: RootState) => state.plans.style);
   const showInformationBox = useSelector(
     (state: RootState) => state.plans.showInformation
   );
+
   const [showDialog, setShowDialog] = useState(false);
   const [voterData, setVoterData] = useState({
     Name: "",
     Comment: "",
+    Plan: Plans[index].name,
   });
 
   const openDialog = () => {
@@ -59,11 +64,13 @@ const CardCarousel = () => {
 
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
+    setCookie("vote", true, { path: "/" });
     axios.post(API, voterData).then((res) => {
       console.log(res);
       setVoterData({
         Name: "",
         Comment: "",
+        Plan: Plans[index].name,
       });
     });
   };
@@ -104,7 +111,7 @@ const CardCarousel = () => {
           style={{
             backgroundColor: style.primaryColor,
           }}
-          // disabled
+          disabled={cookies.vote}
           onClick={openDialog}
         >
           Quiero ir ahí!
@@ -177,8 +184,9 @@ const CardCarousel = () => {
                     </div>
                     <div className="flex justify-evenly mt-5">
                       <button
+                        type="button"
                         className={`px-2 py-1 border-black border-2 rounded-lg
-                      ${style.darkMode ? "text-white" : "text-black"}`}
+                        ${style.darkMode ? "text-white" : "text-black"}`}
                         style={{
                           backgroundColor: style.primaryColor,
                         }}
@@ -186,15 +194,17 @@ const CardCarousel = () => {
                       >
                         Cancelar
                       </button>
-                      <input
+                      <button
                         type="submit"
                         className={`px-2 py-1 border-black border-2 rounded-lg
-                      ${style.darkMode ? "text-white" : "text-black"}`}
+                        ${style.darkMode ? "text-white" : "text-black"}`}
                         style={{
                           backgroundColor: style.primaryColor,
                         }}
                         onClick={closeDialog}
-                      />
+                      >
+                        Enviar
+                      </button>
                     </div>
                   </form>
                 </Dialog.Panel>
