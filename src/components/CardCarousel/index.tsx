@@ -17,7 +17,6 @@ import { useCookies } from "react-cookie";
 
 const OptionSelected = ({ index }: { index: number }) => {
   const style = useSelector((state: RootState) => state.plans.style);
-
   return (
     <div>
       <h2
@@ -169,6 +168,7 @@ const CardCarousel = () => {
                         <input
                           type="text"
                           id="name"
+                          required
                           placeholder="Escribe tu nombre..."
                           className="text-black focus:outline-none py-1 px-2 rounded-lg"
                           value={voterData.Name}
@@ -209,10 +209,12 @@ const CardCarousel = () => {
                         <button
                           type="submit"
                           className={`px-2 py-1 border-black border-2 rounded-lg
-                        ${style.darkMode ? "text-white" : "text-black"}`}
+                          disabled:opacity-50
+                          ${style.darkMode ? "text-white" : "text-black"}`}
                           style={{
                             backgroundColor: style.primaryColor,
                           }}
+                          disabled={voterData.Name === ""}
                           onClick={closeDialog}
                         >
                           Enviar
