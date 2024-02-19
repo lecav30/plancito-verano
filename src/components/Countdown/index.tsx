@@ -1,19 +1,12 @@
-import { useRef, useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
+import './styles.css';
 import Beach from "../../images/playahd2.jpg";
-import useScreenWidth from "../../hooks/useScreenWidth";
-
 const Countdown = () => {
-  const screenWidth = useScreenWidth();
-
   const [days, setDays] = useState(0);
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
-
-  const daysCircle = useRef<SVGCircleElement | null>(null);
-  const hourCircle = useRef<SVGCircleElement | null>(null);
-  const minuteCircle = useRef<SVGCircleElement | null>(null);
-  const secondCircle = useRef<SVGCircleElement | null>(null);
+  const secondTimer = useRef(null);
 
   const actualizarContador = () => {
     const deadline = new Date("2024-03-09T00:00:00");
@@ -32,29 +25,7 @@ const Countdown = () => {
     setHours(hoursDifference);
     setMinutes(minutesDifference);
     setSeconds(secondsDifference);
-
-    if (daysCircle.current) {
-      daysCircle.current.style.strokeDashoffset = `${
-        440 - (440 * daysDifference) / 30
-      }px`;
-    }
-    if (hourCircle.current) {
-      hourCircle.current.style.strokeDashoffset = `${
-        451 - (451 * hoursDifference) / 24
-      }px`;
-    }
-    if (minuteCircle.current) {
-      minuteCircle.current.style.strokeDashoffset = `${
-        451 - (451 * minutesDifference) / 60
-      }px`;
-    }
-    if (secondCircle.current) {
-      secondCircle.current.style.strokeDashoffset = `${
-        451 - (451 * secondsDifference) / 60
-      }px`;
-    }
-  };
-
+    };
   useEffect(() => {
     const clock = setInterval(actualizarContador, 1000);
 
@@ -62,7 +33,6 @@ const Countdown = () => {
       clearInterval(clock);
     };
   });
-
   return (
     <div
       className="flex flex-col md:flex-row justify-center items-center bg-cover bg-no-repeat
@@ -73,167 +43,91 @@ const Countdown = () => {
     >
       <h1
         className="absolute font-bold top-[10%] text-center text-5xl md:text-6xl 
-        leading-snug md:leading-normal"
+        leading-snug md:leading-normal max-md:top-[5%]"
       >
         PLANCITO <br className="md:hidden" />
         DE <br className="md:hidden" />
         VERANO
       </h1>
-      {screenWidth < 768 ? (
-        <div className="flex flex-wrap justify-center items-center backdrop-blur-md rounded-lg">
-          <svg className="-rotate-90 h-48 w-48">
-            <circle
-              r="90"
-              cx="100"
-              cy="100"
-              className="fill-transparent stroke-[#FEDD00] stroke-[8px]"
-            ></circle>
-            <circle
-              r="90"
-              ref={daysCircle}
-              cx="100"
-              cy="100"
-              style={{
-                strokeDasharray: "500px",
-                strokeDashoffset: "500px",
-              }}
-              className="fill-transparent stroke-white stroke-[8px]"
-            ></circle>
-          </svg>
-          <div
-            className="text-[#000000] absolute top-[48px] left-11 text-xl font-semibold
-            flex flex-col items-center w-24 h-20 mx-2"
-          >
-            <div className="flex gap-2">
-              <span className="text-center">{days}</span>
-              <span className="text-center">Días</span>
+      <div className="flex gap-3 sm:gap-1   backdrop-blur-md h-36 rounded-lg overflow-hidden pt-2 pr-3 sm:pt-0 sm:pr-0">
+        <div className="flex flex-col backdrop-blur-md sm:w-32 w-16">
+          <div className="h-16 sm:h-20 backdrop-blur-md">
+            <div className="h-[60px] flex justify-center backdrop-blur-md sm:text-3xl text-xl !text-[#000000]">
+              <div
+                className={
+                  days >= 0 &&
+                  hours == 23 &&
+                  minutes == 59 &&
+                  seconds == 59
+                    ? "animate-timer"
+                    : "relative top-5"
+                }
+              >
+                {days}
+              </div>
             </div>
-            <div className="flex gap-2">
-              <span className="text-center">{hours}</span>
-              <span className="text-center">Horas</span>
-            </div>
-            <div className="flex gap-2">
-              <span className="text-center">{minutes}</span>
-              <span className="text-center">Minutos</span>
-            </div>
+          </div>
+          <div className="flex justify-center">
+            <span className="text-lg sm:text-2xl text-center text-[#000000]">
+              {days == 1 ? "Dia" : "Dias"}
+            </span>
           </div>
         </div>
-      ) : (
-        <div className="flex flex-wrap justify-center items-center backdrop-blur-md rounded-lg">
-          <div className="relative">
-            <svg className="-rotate-90 h-48 w-48">
-              <circle
-                r="70"
-                cx="90"
-                cy="90"
-                className="fill-transparent stroke-[#FEDD00] stroke-[8px]"
-              ></circle>
-              <circle
-                r="70"
-                ref={daysCircle}
-                cx="90"
-                cy="90"
-                style={{
-                  strokeDasharray: "440px",
-                  strokeDashoffset: "440px",
-                }}
-                className="fill-transparent stroke-white stroke-[8px]"
-              ></circle>
-            </svg>
-            <div
-              className="text-[#000000] absolute top-16 left-11 text-2xl font-semibold
-            flex flex-col items-center w-24 h-20"
-            >
-              <span className="text-center">{days}</span>
-              <span className="text-center">Dias</span>
+        <div className="flex flex-col backdrop-blur-md sm:w-32 w-16">
+          <div className="h-16 sm:h-20 backdrop-blur-md">
+            <div className="h-[60px] flex justify-center backdrop-blur-md sm:text-3xl text-xl !text-[#000000]">
+              <div
+                className={
+                  hours >= 0 &&
+                  minutes == 59 &&
+                  seconds == 59
+                    ? "animate-timer"
+                    : "relative top-5"
+                }
+              >
+                {hours}
+              </div>
             </div>
           </div>
-          <div className="relative">
-            <svg className="-rotate-90 h-48 w-48">
-              <circle
-                r="70"
-                cx="90"
-                cy="90"
-                className="fill-transparent stroke-[#FEDD00] stroke-[8px]"
-              ></circle>
-              <circle
-                r="70"
-                ref={hourCircle}
-                cx="90"
-                cy="90"
-                style={{
-                  strokeDasharray: "451px",
-                  strokeDashoffset: "451px",
-                }}
-                className="fill-transparent stroke-white stroke-[8px]"
-              ></circle>
-            </svg>
-            <div
-              className="text-[#000000] absolute top-16 left-11 text-2xl font-semibold
-              flex flex-col items-center w-24 h-20"
-            >
-              <span className="text-center">{hours}</span>
-              <span className="text-center">Horas</span>
-            </div>
-          </div>
-          <div className="relative">
-            <svg className="-rotate-90 h-48 w-48">
-              <circle
-                r="70"
-                cx="90"
-                cy="90"
-                className="fill-transparent stroke-[#FEDD00] stroke-[8px]"
-              ></circle>
-              <circle
-                r="70"
-                ref={minuteCircle}
-                cx="90"
-                cy="90"
-                style={{
-                  strokeDasharray: "451px",
-                  strokeDashoffset: "451px",
-                }}
-                className="fill-transparent stroke-white stroke-[8px]"
-              ></circle>
-            </svg>
-            <div
-              className="text-[#000000] absolute top-16 left-11 text-2xl font-semibold 
-            flex flex-col items-center w-24 h-20"
-            >
-              <span className="text-center">{minutes}</span>
-              <span className="text-center">Minutos</span>
-            </div>
-          </div>
-          <div className="relative">
-            <svg className="-rotate-90 h-48 w-48">
-              <circle
-                r="70"
-                cx="90"
-                cy="90"
-                className="fill-transparent stroke-[#FEDD00] stroke-[8px]"
-              ></circle>
-              <circle
-                r="70"
-                ref={secondCircle}
-                cx="90"
-                cy="90"
-                style={{
-                  strokeDasharray: "451px",
-                  strokeDashoffset: "451px",
-                }}
-                className="fill-transparent stroke-white stroke-[8px]"
-              ></circle>
-            </svg>
-            <div
-              className="text-[#000000] absolute top-16 left-11 text-2xl font-semibold 
-            flex flex-col items-center w-24 h-20"
-            >
-              <span className="text-center">{seconds}</span>
-              <span className="text-center">Segundos</span>
-            </div>
+          <div className="flex justify-center">
+            <span className="text-lg sm:text-2xl text-center text-[#000000]">
+              {hours == 1 ? "Hora" : "Horas"}
+            </span>
           </div>
         </div>
-      )}
+        <div className="flex flex-col backdrop-blur-md sm:w-32 w-16">
+          <div className="h-16 sm:h-20 bg-backdrop-blur-md">
+            <div className="h-[60px] flex justify-center backdrop-blur-md sm:text-3xl text-xl !text-[#000000]">
+              <div
+                className={
+                  minutes >= 0 && seconds == 60
+                    ? "animate-timer"
+                    : "relative top-5"
+                }
+              >
+                {minutes}
+              </div>
+            </div>
+          </div>
+          <div className="flex justify-center">
+            <span className="text-lg sm:text-2xl text-center text-[#000000]">
+              {minutes == 1 ? "Minuto" : "Minutos"}
+            </span>
+          </div>
+        </div>
+        <div className="flex flex-col backdrop-blur-md sm:w-32 w-16">
+          <div className="h-16 sm:h-20 backdrop-blur-md">
+            <div className="h-[60px] flex justify-center  backdrop-blur-md overflow-hidden sm:text-3xl text-xl text-[#000000]">
+              <div ref={secondTimer} className={seconds < 61 ? "animate-timer" : "relative-top-5"}>{seconds}</div>
+            </div>
+          </div>
+          <div className="flex justify-center">
+            <span className="text-lg sm:text-2xl text-center text-[#000000]">
+              {seconds == 1 ? "Segundo" : "Segundos"}
+            </span>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
