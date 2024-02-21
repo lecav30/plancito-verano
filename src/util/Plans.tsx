@@ -54,12 +54,11 @@ export const Plans = [
     resume: (
       <div>
         <b>Nos vamos a la playa!!!</b>🏖️ <br />
-        Si visitamos la playa ..., podremos disfrutar del sol y el mar,
-        enterraremos a Favio en arena y no lo dejaremos salir 😹. Una
-        competencia de castillos de arena y el ganador se lleva una lanzada al
-        mar.😜 Podemos juntarnos antes y poder llevar almuerzo para todos
-        (Melany no cocinará 🙏🏻), comprar comida cerca o visitar la plaza en
-        busca de más opciones para divertirnos😁.
+        Podremos disfrutar del sol y el mar, enterraremos a Favio en arena y no
+        lo dejaremos salir 😹. Una competencia de castillos de arena y el
+        ganador se lleva una lanzada al mar.😜 Podemos juntarnos antes y poder
+        llevar almuerzo para todos (Melany no cocinará 🙏🏻), comprar comida cerca
+        o visitar la plaza en busca de más opciones para divertirnos😁.
       </div>
     ),
     media: (
