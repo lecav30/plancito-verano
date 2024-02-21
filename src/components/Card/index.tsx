@@ -3,7 +3,6 @@ import { handleShowInformation } from "../../features/plans/plansSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 
-
 interface InformationButtonProps {
   name: string;
   onClick?: () => void;
@@ -43,7 +42,7 @@ const InformationBox: FC<InformationProps> = (props) => {
       ${props.visible ? "block" : "hidden"}`}
     >
       <button
-        className="absolute top-10 right-10"
+        className="absolute top-5 right-5 md:top-10 md:right-10"
         onClick={() => dispatch(handleShowInformation())}
       >
         <svg
@@ -107,9 +106,14 @@ const Card: FC<CardProps> = (props) => {
         {informationContent}
       </InformationBox>
       <div className="relative flex justify-center ">
-        <img src={props.img} alt="Portada" className="rounded-3xl h-96 max-lg:h-80" />
+        <img
+          src={props.img}
+          alt="Portada"
+          className="rounded-3xl h-96 max-lg:h-80"
+        />
         <div
-          className={`flex justify-evenly min-w-[50%] absolute bottom-[20%] max-lg:space-x-3
+          className={`flex justify-evenly min-w-[50%] absolute bottom-[20%] space-x-5
+          lg:space-x-3
           ${showInformationBox ? "hidden" : "visible"}`}
         >
           <InformationButton

@@ -21,7 +21,17 @@ export const Plans = [
         <b>Total:</b> S/.100 - S/.120
       </div>
     ),
-    resume: <div></div>,
+    resume: (
+      <div>
+        <b>Nos vamos a la piscina </b> 🤯 <br />
+        Visitaremos el bar acuático donde al menos Lalito terminará como Yerhal
+        en cada tono 🥴, habrá atracciones como los toboganes de agua, el bar
+        acuático cuenta con lugares para comer o podemos buscar otro lugar en
+        las afueras. En este plancito no tendremos un único destino, podremos
+        hacer una parada y visitar la plaza, comprar algún recuerdo, probar
+        algunas cosas, etc. 🤗
+      </div>
+    ),
     media: (
       <InstagramEmbed url="https://www.instagram.com/reel/C18EbH1Jolc/?utm_source=ig_web_button_share_sheet" />
     ),
@@ -41,7 +51,17 @@ export const Plans = [
         <b>Total:</b> S/.100 - S/.120
       </div>
     ),
-    resume: <div></div>,
+    resume: (
+      <div>
+        <b>Nos vamos a la playa!!!</b>🏖️ <br />
+        Si visitamos la playa ..., podremos disfrutar del sol y el mar,
+        enterraremos a Favio en arena y no lo dejaremos salir 😹. Una
+        competencia de castillos de arena y el ganador se lleva una lanzada al
+        mar.😜 Podemos juntarnos antes y poder llevar almuerzo para todos
+        (Melany no cocinará 🙏🏻), comprar comida cerca o visitar la plaza en
+        busca de más opciones para divertirnos😁.
+      </div>
+    ),
     media: (
       <TikTokEmbed url="https://www.tiktok.com/@sinplaness/video/7320050212020423942" />
     ),
@@ -60,7 +80,14 @@ export const Plans = [
         <b>Total:</b> S/.120 - S/.130
       </div>
     ),
-    resume: <div></div>,
+    resume: (
+      <div>
+        <b>Nos vamos a Cerro Azul!!!</b> 🏖️ <br />
+        Si tu principal intención es dormir en cucharita como Lalito y Yerhal 😈
+        bajo las estrellas este plancito es tuyo 🤭. Visitando la playa en Cerro
+        Azul nos añade la opción de quedarnos una noche fuera de Lima 🫡.
+      </div>
+    ),
     media: (
       <YouTubeEmbed
         url="https://youtu.be/RHbENWNVXCw?si=dhVP6gyaMPvp1kQU"
