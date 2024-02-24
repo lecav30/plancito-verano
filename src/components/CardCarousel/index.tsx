@@ -67,14 +67,15 @@ const CardCarousel = () => {
 
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
+    setCookie("vote", true, { path: "/" });
     console.log(voterData);
     axios.post(API, voterData).then((res) => {
-      console.log(res);
       setVoterData({
         Name: "",
         Comment: "",
         Plan: Plans[index].name,
       });
+      console.log(res);
     });
   };
 
