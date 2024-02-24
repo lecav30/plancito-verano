@@ -9,7 +9,7 @@ import {
 } from "../../features/plans/plansSlice";
 import { Plans } from "../../util/Plans";
 import { Dialog, Transition } from "@headlessui/react";
-import { useState, Fragment } from "react";
+import { useState, Fragment, useEffect } from "react";
 import { RootState } from "../../redux/store";
 import { myStyles } from "../../util/Styles";
 import axios from "axios";
@@ -61,9 +61,13 @@ const CardCarousel = () => {
     setShowDialog(false);
   };
 
+  useEffect(() => {
+    setVoterData({ ...voterData, Plan: Plans[index].name });
+  }, [index]);
+
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    setCookie("vote", true, { path: "/" });
+    console.log(voterData);
     axios.post(API, voterData).then((res) => {
       console.log(res);
       setVoterData({
@@ -198,7 +202,7 @@ const CardCarousel = () => {
                         <button
                           type="button"
                           className={`px-2 py-1 border-black border-2 rounded-lg
-                        ${style.darkMode ? "text-white" : "text-black"}`}
+                          ${style.darkMode ? "text-white" : "text-black"}`}
                           style={{
                             backgroundColor: style.primaryColor,
                           }}
